@@ -1,9 +1,9 @@
 const CANVAS_WIDTH = screen.width;
 const CANVAS_HEIGHT = screen.height;
 const NUM_POINTS = 14;
-const START_THETA = Math.PI * 3 / 2;
 const NUM_ROUNDS = 7;
 const FFT_SIZE = 16384;
+const DAMPING = 100;
 
 
 function CarPoint(x, y) {
@@ -88,27 +88,27 @@ function draw() {
   // console.log("max: "+ MAX_BIN);
   const MAX_WEIGHT = 10;
   let numPoints = 32768;
-  let colorOffset = mouseY / CANVAS_HEIGHT;
+  let colorOffset = 128;
   colorMode(HSB, 255);
-  background(0, 20);
+  background(0, DAMPING);
   strokeWeight(4);
+  let minTheta = Math.PI * 3 / 2;
   let maxR = CANVAS_HEIGHT/2;
   let minR = CANVAS_HEIGHT/20;
-  let rScale = maxR - minR;
   let origin = new CarPoint(CANVAS_WIDTH/2, CANVAS_HEIGHT/2);
-  let lastPoint = new PolPoint(minR, START_THETA);
+  let lastPoint = new PolPoint(minR, minTheta);
 
   for (let i = MIN_BIN; i <= MAX_BIN; i++) {
     // if (spectrum[i] != 0) {
     //   console.log(spectrum[i]);
     // }
-    let percentWayThroughSpiral = (i - MIN_BIN) / (MAX_BIN - MIN_BIN);
     let freq = i * HZ_PER_BIN;
     let note = Math.log2(freq / MIN_FREQ);
-    let theta = note * Math.PI * 2;
+    let percentWayThroughSpiral = note / NUM_ROUNDS;
+    let theta = minTheta + (note * Math.PI * 2);
     let r = minR + ((maxR - minR) * (note / NUM_ROUNDS)) + (spectrum[i]/4.);
     let newPoint = new PolPoint(r, theta);
-    let h = (colorOffset + (percentWayThroughSpiral * 255)) % 255;
+    let h = (colorOffset + percentWayThroughSpiral * 255) % 255;
   //   if (i % 100 == 0) {
   //     console.log(i);
   //     console.log(freq);
