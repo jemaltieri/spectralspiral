@@ -1,9 +1,8 @@
 const CANVAS_WIDTH = screen.width;
 const CANVAS_HEIGHT = screen.height;
-const NUM_POINTS = 14;
 const NUM_ROUNDS = 7;
 const FFT_SIZE = 16384;
-const DAMPING = 100;
+const DAMPING = 50;
 
 
 function CarPoint(x, y) {
@@ -88,7 +87,7 @@ function draw() {
   // console.log("max: "+ MAX_BIN);
   const MAX_WEIGHT = 10;
   let numPoints = 32768;
-  let colorOffset = 128;
+  let colorOffset = 240;
   colorMode(HSB, 255);
   background(0, DAMPING);
   strokeWeight(4);
