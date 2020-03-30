@@ -14,7 +14,7 @@ const FFT_SIZE = 16384;
 const FFT_SMOOTHING = 0.8;
 
 // DAMPING is a number from 0 - 255 that sets the opacity of the black overlay at the beginning of each frame
-const DAMPING = 50;
+const DAMPING = 30;
 
 // WIGGLE_AMPLITUDE is a multiplier for the signal that alters the spiral
 const WIGGLE_AMPLITUDE = 1.5;
@@ -31,6 +31,9 @@ const STROKE_WEIGHT = 4;
 // COLOR_OFFSET is a number from 0 - 255 that sets the color at the inside of the spiral. The entire
 // spectrum of Hue will be traversed over the course of the spiral
 const COLOR_OFFSET = 236;
+
+const NUDGE_X = -80;
+const NUDGE_Y = -15;
 
 
 /*
@@ -135,12 +138,12 @@ function draw() {
   background(0, DAMPING);
   strokeWeight(STROKE_WEIGHT);
 
-  let margin = canvasHeight/30;
+  let margin = canvasHeight/25;
   let maxR = canvasHeight/2 - margin;
   let minR = canvasHeight/60;
   // a represents the normal meaning of "a" in the archimede's spiral equation of r = a * theta
   let a = (maxR - minR) / NUM_OCTAVES;
-  let origin = new CarPoint(canvasWidth/2, canvasHeight/2);
+  let origin = new CarPoint((canvasWidth/2) + NUDGE_X, canvasHeight/2 + NUDGE_Y);
 
   // scope lastPoint outside bin loop
   let lastPoint;
