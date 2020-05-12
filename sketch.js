@@ -10,7 +10,7 @@ const NUM_OCTAVES = 5;
 // p5.js implemenation of the FFT throws out the bins above the nyquist.
 // As with all FFTs (and like, all particles TBH), frequency resolution and time resolution
 // are inversely proportional. See Heisenberg et al. 😜
-const FFT_SIZE = 16384;
+const FFT_SIZE = 4096;
 const FFT_SMOOTHING = 0.8;
 
 // DAMPING is a number from 0 - 255 that sets the opacity of the black overlay at the beginning of each frame
@@ -20,10 +20,10 @@ const DAMPING = 30;
 const WIGGLE_AMPLITUDE = 1.5;
 
 // FREQUENCY_AT_ZERO_THETA is a frequency that you want lined up at theta=0, which is 3 o'clock on our grid
-const FREQUENCY_AT_ZERO_THETA = 87.3;
+const FREQUENCY_AT_ZERO_THETA = 110;
 
 // MIN_FREQ is the minimum frequency that will be displayed on the spiral
-const MIN_FREQ = 87.3;
+const MIN_FREQ = 110;
 
 // STROKE_WEIGHT determines the weight of the lines drawn for the spiral
 const STROKE_WEIGHT = 4;
